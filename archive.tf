@@ -1,6 +1,7 @@
 # Generates a filename for the zip archive based on the contents of the files
 # in source_path. The filename will change when the source code changes.
 data "external" "archive" {
+  count = "${var.source_from_s3 ? 0 : 1}"
   program = ["${path.module}/hash.py"]
 
   query = {
@@ -11,6 +12,7 @@ data "external" "archive" {
 
 # Build the zip archive whenever the filename changes.
 resource "null_resource" "archive" {
+  count = "${var.source_from_s3 ? 0 : 1}"
   triggers {
     filename = "${lookup(data.external.archive.result, "filename")}"
   }
@@ -26,6 +28,7 @@ resource "null_resource" "archive" {
 # deletes the Lambda function. If the file is rebuilt here, the build
 # output is unfortunately invisible.
 data "external" "built" {
+  count = "${var.source_from_s3 ? 0 : 1}"
   program = ["${path.module}/built.py"]
 
   query = {

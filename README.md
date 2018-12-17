@@ -81,7 +81,10 @@ function name unique per region, for example by setting
 | policy | An addional policy to attach to the Lambda function | string | `` | no |
 | reserved_concurrent_executions | The amount of reserved concurrent executions for this Lambda function | string | `0` | no |
 | runtime | The runtime environment for the Lambda function | string | - | yes |
-| source_path | The source file or directory containing your Lambda source code | string | - | yes |
+| s3_bucket | The S3 bucket location containing the function's deployment package. Required when `source_from_s3` = `true`. This bucket must reside in the same AWS region where you are creating the Lambda function. | string | - | no |
+| s3_key | The S3 key of an object containing the function's deployment package. Required when `source_from_s3` = `true` | string | - | no |
+| source_from_s3 | Set this to true if fetching the Lambda source code from S3. | string | `false` | no |
+| source_path | The source file or directory containing your Lambda source code. Ignored when `source_from_s3` = `true` | string | `` | no |
 | tags | A mapping of tags | map | `<map>` | no |
 | timeout | The amount of time your Lambda function had to run in seconds | string | `10` | no |
 | vpc_config | VPC configuration for the Lambda function | map | `<map>` | no |
