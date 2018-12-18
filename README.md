@@ -54,6 +54,14 @@ module "lambda" {
     subnet_ids         = ["${aws_subnet.test.id}"]
     security_group_ids = ["${aws_security_group.test.id}"]
   }
+
+  // Trigger from a Cloudwatch Events rule.
+  attach_cloudwatch_rule_config = true
+  cloudwatch_rule_config {
+    name = "scheduled-run"
+    description = "Run my lambda every day at 8pm"
+    schedule_expression = "cron(0 20 * * ? *)"
+  }
 }
 ```
 
