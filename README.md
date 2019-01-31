@@ -101,15 +101,8 @@ function name unique per region, for example by setting
 
 | Name | Description |
 |------|-------------|
-<<<<<<< HEAD
 | function\_arn | The ARN of the Lambda function |
 | function\_name | The name of the Lambda function |
 | role\_arn | The ARN of the IAM role created for the Lambda function |
 | role\_name | The name of the IAM role created for the Lambda function |
-=======
-| function_arn | The ARN of the Lambda function |
-| function_name | The name of the Lambda function |
-| role_arn | The ARN of the IAM role created for the Lambda function |
-| role_name | The name of the IAM role created for the Lambda function |
-| cloudwatch_rule_arn | The ARN of the Cloudwatch rule |
->>>>>>> Support for scheduled lambda runs through Cloudwatch Events rule
+| cloudwatch\_rule\_arn | The ARN of the Cloudwatch rule |
