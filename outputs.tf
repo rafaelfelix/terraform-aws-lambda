@@ -20,5 +20,5 @@ output "role_name" {
 
 output "cloudwatch_rule_arn" {
   description = "The ARN of the Cloudwatch rule"
-  value       = ["${compact(concat(aws_cloudwatch_event_rule.rule.*.arn))}"]
+  value       = "${element(concat(aws_cloudwatch_event_rule.rule.*.arn), 0)}"
 }

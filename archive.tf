@@ -1,3 +1,7 @@
+locals {
+  module_relpath = "${substr(path.module, length(path.cwd) + 1, -1)}"
+}
+
 # Generates a filename for the zip archive based on the contents of the files
 # in source_path. The filename will change when the source code changes.
 data "external" "archive" {
@@ -5,8 +9,11 @@ data "external" "archive" {
   program = ["python", "${path.module}/hash.py"]
 
   query = {
-    runtime     = "${var.runtime}"
-    source_path = "${var.source_path}"
+    build_command  = "${var.build_command}"
+    build_paths    = "${jsonencode(var.build_paths)}"
+    module_relpath = "${local.module_relpath}"
+    runtime        = "${var.runtime}"
+    source_path    = "${var.source_path}"
   }
 }
 
@@ -18,7 +25,8 @@ resource "null_resource" "archive" {
   }
 
   provisioner "local-exec" {
-    command = "${lookup(data.external.archive.result, "build_command")}"
+    command     = "${lookup(data.external.archive.result, "build_command")}"
+    working_dir = "${path.module}"
   }
 }
 
@@ -32,8 +40,9 @@ data "external" "built" {
   program = ["python", "${path.module}/built.py"]
 
   query = {
-    build_command = "${lookup(data.external.archive.result, "build_command")}"
-    filename_old  = "${lookup(null_resource.archive.triggers, "filename")}"
-    filename_new  = "${lookup(data.external.archive.result, "filename")}"
+    build_command  = "${lookup(data.external.archive.result, "build_command")}"
+    filename_old   = "${lookup(null_resource.archive.triggers, "filename")}"
+    filename_new   = "${lookup(data.external.archive.result, "filename")}"
+    module_relpath = "${local.module_relpath}"
   }
 }

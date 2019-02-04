@@ -28,6 +28,7 @@ module "lambda" {
 
   cloudwatch_rule_config {
     name = "scheduled-run"
+    # enabled = false
     description = "Test scheduled lambda run"
     schedule_expression = "cron(0 20 * * ? *)"
   }
