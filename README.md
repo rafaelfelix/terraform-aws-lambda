@@ -90,8 +90,10 @@ function name unique per region, for example by setting
 | environment | Environment configuration for the Lambda function | map | `<map>` | no |
 | function\_name | A unique name for your Lambda function (and related IAM resources) | string | n/a | yes |
 | handler | The function entrypoint in your code | string | n/a | yes |
+| lambda\_at\_edge | Set this to true if using Lambda@Edge, to enable publishing, limit the timeout, and allow edgelambda.amazonaws.com to invoke the function | string | `"false"` | no |
 | memory\_size | Amount of memory in MB your Lambda function can use at runtime | string | `"128"` | no |
 | policy | An addional policy to attach to the Lambda function | string | `""` | no |
+| publish | Whether to publish creation/change as new Lambda Function Version | string | `"false"` | no |
 | reserved\_concurrent\_executions | The amount of reserved concurrent executions for this Lambda function | string | `"0"` | no |
 | runtime | The runtime environment for the Lambda function | string | n/a | yes |
 | s3\_bucket | The S3 bucket location containing the function's deployment package. Required when `source_from_s3` = `true`. This bucket must reside in the same AWS region where you are creating the Lambda function. | string | - | no |
@@ -109,5 +111,6 @@ function name unique per region, for example by setting
 | cloudwatch\_rule\_arn | The ARN of the Cloudwatch rule |
 | function\_arn | The ARN of the Lambda function |
 | function\_name | The name of the Lambda function |
+| function\_qualified\_arn | The qualified ARN of the Lambda function |
 | role\_arn | The ARN of the IAM role created for the Lambda function |
 | role\_name | The name of the IAM role created for the Lambda function |
