@@ -10,7 +10,7 @@ output "function_name" {
 
 output "function_qualified_arn" {
   description = "The qualified ARN of the Lambda function"
-  value       = "${element(concat(aws_lambda_function.lambda.*.qualified_arn, aws_lambda_function.lambda_with_dl.*.qualified_arn, aws_lambda_function.lambda_with_vpc.*.qualified_arn, aws_lambda_function.lambda_with_dl_and_vpc.*.qualified_arn), 0)}"
+  value       = "${element(concat(aws_lambda_function.lambda.*.qualified_arn, aws_lambda_function.lambda_s3.*.qualified_arn, aws_lambda_function.lambda_with_dl.*.qualified_arn, aws_lambda_function.lambda_with_vpc.*.qualified_arn, aws_lambda_function.lambda_with_dl_and_vpc.*.qualified_arn), 0)}"
 }
 
 output "role_arn" {
